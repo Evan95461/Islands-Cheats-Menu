@@ -1902,7 +1902,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			HueSelection.AnchorPoint = Vector2.new(0.5, 0.5)
 			HueSelection.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			HueSelection.BackgroundTransparency = 1.000
-			HueSelection.Position = UDim2.new(0.48, 0, 1 - select(1, Color3.toHSV(preset)))
+			HueSelection.Position = UDim2.new(0.48, 0, 1 - select(1, Color3.toHSV(preset)), 0)
 			HueSelection.Size = UDim2.new(0, 18, 0, 18)
 			HueSelection.Image = "http://www.roblox.com/asset/?id=4805639000"
 			HueSelection.Visible = false
@@ -1924,7 +1924,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			ColorSelection.AnchorPoint = Vector2.new(0.5, 0.5)
 			ColorSelection.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			ColorSelection.BackgroundTransparency = 1.000
-			ColorSelection.Position = UDim2.new(preset and select(3, Color3.toHSV(preset)))
+			ColorSelection.Position = UDim2.new(preset and select(3, Color3.toHSV(preset)), 0, 0, 0)
 			ColorSelection.Size = UDim2.new(0, 18, 0, 18)
 			ColorSelection.Image = "http://www.roblox.com/asset/?id=4805639000"
 			ColorSelection.ScaleType = Enum.ScaleType.Fit
