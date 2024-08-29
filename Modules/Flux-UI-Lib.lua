@@ -269,7 +269,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 		NotificationTitle.Position = UDim2.new(0.0400609747, 0, 0.0761325806, 0)
 		NotificationTitle.Size = UDim2.new(0, 111, 0, 34)
 		NotificationTitle.Font = Enum.Font.GothamBold
-		NotificationTitle.Text = NotificationTitle.Text .. " | NOTIFICATION"
+		NotificationTitle.Text = Title.Text .. " | NOTIFICATION"
 		NotificationTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 		NotificationTitle.TextSize = 24.000
 		NotificationTitle.TextXAlignment = Enum.TextXAlignment.Left
