@@ -755,6 +755,14 @@ function Flux:Window(text, bottom,mainclr,toclose)
 				BtnDescToggled = not BtnDescToggled
 			end)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+
+			local function destroy()
+				Button:Destroy()
+			end
+
+			return {
+				Destroy = destroy,
+			}
 		end
 		function ContainerContent.Toggle(toggleText, desc,default, callback)
 			local ToggleDescToggled = false
@@ -1024,6 +1032,15 @@ function Flux:Window(text, bottom,mainclr,toclose)
 				pcall(callback, Toggled)
 			end
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+			
+			local function destroy()
+				Toggle:Destroy()
+			end
+
+			return {
+				Destroy = destroy,
+			}
+
 		end
 		
 		function ContainerContent.Slider(sliderText,desc,min,max,start,callback)
@@ -1161,7 +1178,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 
 			Value.Name = "Value"
 			Value.Parent = sliderTitle
-			Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		   Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Value.BackgroundTransparency = 1.000
 			Value.Position = UDim2.new(2.27693367, 0, 0, 0)
 			Value.Size = UDim2.new(0, 113, 0, 41)
@@ -1323,6 +1340,9 @@ function Flux:Window(text, bottom,mainclr,toclose)
 				SlideCircle.Position = UDim2.new((tochange or 0)/max, -6,-1.30499995, 0)
 				Value.Text = tostring(tochange and math.floor((tochange / max) * (max - min) + min) or 0)
 				pcall(callback,tochange)
+			end
+			function SliderFunc.Destroy()
+				Slider:Destroy()
 			end
 			return SliderFunc
 		end
@@ -1801,6 +1821,9 @@ function Flux:Window(text, bottom,mainclr,toclose)
 					wait(.4)
 					Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 				end
+			end
+			function DropFunc.Destroy()
+				Dropdown:Destroy()
 			end
 			return DropFunc
 		end
@@ -2301,6 +2324,15 @@ function Flux:Window(text, bottom,mainclr,toclose)
 				end
 			)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+
+			local function destroy()
+				Colorpicker:Destroy()
+			end
+
+			return {
+				Destroy = destroy
+			}
+
 		end
 		function ContainerContent.Line()
 			local Line = Instance.new("TextButton")
@@ -2323,6 +2355,15 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			LineCorner.Parent = Line
 			
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+
+			local function destroy()
+				Line:Destroy()
+			end
+
+			return {
+				Destroy = destroy
+			}
+
 		end
 		function ContainerContent.Label(labelText)
 			local Label = Instance.new("TextButton")
@@ -2359,6 +2400,15 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			labelTitle.TextXAlignment = Enum.TextXAlignment.Left
 			
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+
+			local function destroy()
+				Label:Destroy()
+			end
+
+			return {
+				Destroy = destroy
+			}
+
 		end
 		function ContainerContent.Textbox(textboxText,desc,disapper,callback)
 			if desc == "" then
@@ -2592,6 +2642,15 @@ function Flux:Window(text, bottom,mainclr,toclose)
 				TextboxDescToggled = not TextboxDescToggled
 			end)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+
+			local function destroy()
+				TextBox:Destroy()
+			end
+
+			return {
+				Destroy = destroy
+			}
+
 		end
 		function ContainerContent.Bind(bindText,presetbind,callback)
 			local Key = presetbind.Name
@@ -2769,6 +2828,15 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			)
 			
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+
+			local function destroy()
+				Bind:Destroy()
+			end
+
+			return {
+				Destroy = destroy
+			}
+
 		end
 		return ContainerContent
 	end
