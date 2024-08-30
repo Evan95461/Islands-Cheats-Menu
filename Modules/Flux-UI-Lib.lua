@@ -102,6 +102,27 @@ function Flux:Window(text, bottom,mainclr,toclose)
 	local Drag = Instance.new("Frame")
 	local ContainerFolder = Instance.new("Folder")
 
+	local FluxToggleGUI = Instance.new("ScreenGui")
+	FluxToggleGUI.Name = "FluxButton"
+	FluxToggleGUI.Parent = game.CoreGui
+	FluxToggleGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	local FluxButton = Instance.new("TextButton")
+	local ToggleButtonCorner = Instance.new("UICorner")
+	local ToggleStroke = Instance.new("UIStroke")
+	FluxButton.Name = "FluxButton"
+	FluxButton.Parent = FluxToggleGUI
+	FluxButton.AnchorPoint = Vector2.new(0.5, 0.5)
+	FluxButton.Position = UDim2.new(0.95, 0, 0.5, 0)
+	FluxButton.Size = UDim2.new(0.044, 0, 0.098, 0)
+	FluxButton.BackgroundColor3 = Color3.fromRGB(134, 117, 231)
+	FluxButton.Text = "☄️"
+	FluxButton.TextSize = 45
+	ToggleButtonCorner.Parent = FluxButton
+	ToggleStroke.Color = Color3.fromRGB(114, 101, 200)
+	ToggleStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	ToggleStroke.Thickness = 3
+	ToggleStroke.Parent = FluxButton
+
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = FluxLib
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -186,24 +207,32 @@ function Flux:Window(text, bottom,mainclr,toclose)
 	MakeDraggable(Drag,MainFrame)
 	MakeDraggable(LeftFrame,MainFrame)
 	MainFrame:TweenSize(UDim2.new(0, 706, 0, 484), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
-	
+
 	local uitoggled = false
+	local function closeMenu()
+		if uitoggled == false then
+			MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
+			uitoggled = true
+			wait(.5)
+			FluxLib.Enabled = false
+		else
+			MainFrame:TweenSize(UDim2.new(0, 706, 0, 484), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
+			FluxLib.Enabled = true
+			uitoggled = false
+		end
+	end
+
 	UserInputService.InputBegan:Connect(
 		function(io)
 			if io.KeyCode == CloseBind then
-				if uitoggled == false then
-					MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
-					uitoggled = true
-					wait(.5)
-					FluxLib.Enabled = false
-				else
-					MainFrame:TweenSize(UDim2.new(0, 706, 0, 484), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
-					FluxLib.Enabled = true
-					uitoggled = false
-				end
+				closeMenu()
 			end
 		end
 	)
+
+	FluxButton.MouseButton1Click:Connect(function()
+		closeMenu()		
+	end)
 	
 	function Flux.Notification(desc, buttontitle)
 		for _, v in next, MainFrame:GetChildren() do
