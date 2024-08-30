@@ -106,6 +106,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 	FluxToggleGUI.Name = "FluxButton"
 	FluxToggleGUI.Parent = game.CoreGui
 	FluxToggleGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
 	local FluxButton = Instance.new("TextButton")
 	local ToggleButtonCorner = Instance.new("UICorner")
 	local ToggleStroke = Instance.new("UIStroke")
@@ -113,10 +114,10 @@ function Flux:Window(text, bottom,mainclr,toclose)
 	FluxButton.Parent = FluxToggleGUI
 	FluxButton.AnchorPoint = Vector2.new(0.5, 0.5)
 	FluxButton.Position = UDim2.new(0.95, 0, 0.5, 0)
-	FluxButton.Size = UDim2.new(0.044, 0, 0.098, 0)
+	FluxButton.Size = UDim2.new(0.055, 0, 0.1, 0)
 	FluxButton.BackgroundColor3 = Color3.fromRGB(134, 117, 231)
 	FluxButton.Text = "☄️"
-	FluxButton.TextSize = 45
+	FluxButton.TextSize = 35
 	ToggleButtonCorner.Parent = FluxButton
 	ToggleStroke.Color = Color3.fromRGB(114, 101, 200)
 	ToggleStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
