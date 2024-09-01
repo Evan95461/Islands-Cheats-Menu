@@ -9,6 +9,7 @@ local teleportLocation = loadstring(game:HttpGet("https://raw.githubusercontent.
 --// Variables
 local localPlayer = Players.LocalPlayer
 local islandTeleportButtons = {}
+local loadedIslands = {}
 
 -- Build the fast travel section
 local buildLocationSection = function(islandsMenu)
@@ -136,17 +137,20 @@ local buildLocationSection = function(islandsMenu)
                 -- Create button for other players
                 local button = locationSection.Button(`👤 〃 {player.Name}'s Island`, `Teleport to {player.Name}'s Island. The player must be on his island. If he is not, you will just be teleported to him.`, function ()        
                     local success, errorMessage = pcall(function()
-                        local playerCharacter = player.Character
-                        if playerCharacter.PrimaryPart == nil then
-                            error("Impossible to get the player's character", 6)
+                        if not table.find(loadedIslands, player.UserId) then
+                            local playerCharacter = player.Character
+                            if playerCharacter.PrimaryPart == nil then
+                                error("Impossible to get the player's character", 6)
+                            end
+                            localPlayer.Character.PrimaryPart.CFrame = playerCharacter.PrimaryPart.CFrame
+                            task.wait(1.5)
                         end
-                        localPlayer.Character.PrimaryPart.CFrame = playerCharacter.PrimaryPart.CFrame
-                        task.wait(2)
                         local playerIsland = Workspace.Islands:WaitForChild(`{player.UserId}-island`)
                         if playerIsland.PrimaryPart == nil then
                             error("The island has not charged fast enough or the player is not on his island", 6)
                         end
                         localPlayer.Character.PrimaryPart.CFrame = playerIsland.PrimaryPart.CFrame
+                        table.insert(loadedIslands, player.UserId)
                     end)
             
                     if not success then
@@ -164,8 +168,12 @@ local buildLocationSection = function(islandsMenu)
         setupIslandButton()
     end)
 
-    Players.PlayerRemoving:Connect(function()
+    Players.PlayerRemoving:Connect(function(player)
         setupIslandButton()
+        if table.find(loadedIslands, player.UserId) then
+            local loadedIslandIndex = table.find(loadedIslands, player.UserId)
+            table.remove(loadedIslands, loadedIslandIndex)
+        end
     end)
 end
 
