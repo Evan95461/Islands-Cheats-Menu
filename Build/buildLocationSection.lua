@@ -82,7 +82,7 @@ local buildLocationSection = function(islandsMenu)
     end)
 
     -- totems merchant teleport button
-    locationSection.Button("🔮 〃 totems merchant", "Teleport to the totems merchant", function()
+    locationSection.Button("🔮 〃 Totems merchant", "Teleport to the totems merchant", function()
         local success, errorMessage = pcall(function()
             localPlayer.Character.PrimaryPart.CFrame = teleportLocation.totemsMerchant
         end)
@@ -93,7 +93,7 @@ local buildLocationSection = function(islandsMenu)
     end)
 
     -- adventurer merchant teleport button
-    locationSection.Button("🤺 〃 adventurer merchant", "Teleport to the adventurer merchant", function()
+    locationSection.Button("🤺 〃 Adventurer merchant", "Teleport to the adventurer merchant", function()
         local success, errorMessage = pcall(function()
             localPlayer.Character.PrimaryPart.CFrame = teleportLocation.adventurerMerchant
         end)
