@@ -137,8 +137,10 @@ local buildLocationSection = function(islandsMenu)
                 local playerIsland = Workspace.Islands:WaitForChild(`{player.UserId}-island`)
                 if playerIsland.PrimaryPart == nil then
                     task.spawn(function()
+                        local initialPosition = localPlayer.Character.PrimaryPart.CFrame
                         localPlayer.Character.PrimaryPart.CFrame = player.Character.PrimaryPart.CFrame
                         task.wait(1.5)
+                        localPlayer.Character.PrimaryPart.CFrame = initialPosition
                     end)
                 end
 
