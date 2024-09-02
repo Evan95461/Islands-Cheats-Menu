@@ -132,24 +132,23 @@ local buildLocationSection = function(islandsMenu)
                 end)
                 table.insert(islandTeleportButtons, home)
             else
-
-                -- Try load player island
-                local playerIsland = Workspace.Islands:WaitForChild(`{player.UserId}-island`)
-                if playerIsland.PrimaryPart == nil then
-                    task.spawn(function()
-                        local initialPosition = localPlayer.Character.PrimaryPart.CFrame
-                        localPlayer.Character.PrimaryPart.CFrame = player.Character.PrimaryPart.CFrame
-                        task.wait(0.25)
-                        localPlayer.Character.PrimaryPart.CFrame = initialPosition
-                    end)
-                end
-
                 -- Create button for other players
                 local button = locationSection.Button(`👤 〃 {player.Name}'s Island`, `Teleport to {player.Name}'s Island. The player must be on his island. If he is not, you will just be teleported to him.`, function ()        
                     local success, errorMessage = pcall(function()
+
+                        -- Try load player island
+                        local playerIsland = Workspace.Islands:WaitForChild(`{player.UserId}-island`)
+                        if playerIsland.PrimaryPart == nil then
+                            task.spawn(function()
+                                local initialPosition = localPlayer.Character.PrimaryPart.CFrame
+                                localPlayer.Character.PrimaryPart.CFrame = player.Character.PrimaryPart.CFrame
+                                task.wait(0.25)
+                                localPlayer.Character.PrimaryPart.CFrame = initialPosition
+                            end)
+                        end
+
                         localPlayer.Character.PrimaryPart.CFrame = playerIsland.PrimaryPart.CFrame
                     end)
-            
                     if not success then
                         Flux.Notification(`An error occured ! Impossible to teleport you to {player.Name}'s Island. Error: {errorMessage}. Please try again.`, "OK !")
                     end
