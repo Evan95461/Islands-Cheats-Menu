@@ -122,7 +122,7 @@ local buildLocationSection = function(islandsMenu)
             if player.UserId == localPlayer.UserId then
                 local home = locationSection.Button(`🏝️ 〃 My Island`, `Teleport to your Island`, function ()        
                     local success, errorMessage = pcall(function()
-                        local playerIsland = Workspace.Islands:WaitForChild(`{localPlayer.UserId}-island`)
+                        local playerIsland = Workspace.Islands:WaitForChild(`{player.UserId}-island`)
                         localPlayer.Character.PrimaryPart.CFrame = playerIsland.PrimaryPart.CFrame
                     end)
             
@@ -132,11 +132,20 @@ local buildLocationSection = function(islandsMenu)
                 end)
                 table.insert(islandTeleportButtons, home)
             else
-                
+
+                -- Try load player island
+                local playerIsland = Workspace.Islands:WaitForChild(`{player.UserId}-island`)
+                if playerIsland.PrimaryPart == nil then
+                    task.spawn(function()
+                        localPlayer.Character.PrimaryPart.CFrame = player.Character.PrimaryPart.CFrame
+                        task.wait(1.5)
+                    end)
+                end
+
                 -- Create button for other players
                 local button = locationSection.Button(`👤 〃 {player.Name}'s Island`, `Teleport to {player.Name}'s Island. The player must be on his island. If he is not, you will just be teleported to him.`, function ()        
                     local success, errorMessage = pcall(function()
-
+                        localPlayer.Character.PrimaryPart.CFrame = playerIsland.PrimaryPart.CFrame
                     end)
             
                     if not success then
@@ -150,12 +159,7 @@ local buildLocationSection = function(islandsMenu)
     setupIslandButton()
 
     -- Events
-    Players.PlayerAdded:Connect(function(player)
-        local initialPosition = localPlayer.Character.PrimaryPart.CFrame
-        task.wait(3)
-        localPlayer.Character.PrimaryPart.CFrame = player.Character.PrimaryPart.CFrame
-        task.wait(2)
-        localPlayer.Character.PrimaryPart.CFrame = initialPosition
+    Players.PlayerAdded:Connect(function()
         setupIslandButton()
     end)
 
