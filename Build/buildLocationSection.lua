@@ -139,7 +139,7 @@ local buildLocationSection = function(islandsMenu)
                     task.spawn(function()
                         local initialPosition = localPlayer.Character.PrimaryPart.CFrame
                         localPlayer.Character.PrimaryPart.CFrame = player.Character.PrimaryPart.CFrame
-                        task.wait(1.5)
+                        task.wait(0.25)
                         localPlayer.Character.PrimaryPart.CFrame = initialPosition
                     end)
                 end
