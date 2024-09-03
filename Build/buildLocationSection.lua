@@ -133,7 +133,7 @@ local buildLocationSection = function(islandsMenu)
                 table.insert(islandTeleportButtons, home)
             else
                 -- Create button for other players
-                local button = locationSection.Button(`👤 〃 {player.Name}'s Island`, `Teleport to {player.Name}'s Island. The player must be on his island. If he is not, you will just be teleported to him.`, function ()        
+                local button = locationSection.Button(`👤 〃 {player.Name}'s Island`, `Teleport to {player.Name}'s Island. The player must be on his island.`, function ()        
                     local success, errorMessage = pcall(function()
 
                         -- Try load player island
@@ -141,12 +141,19 @@ local buildLocationSection = function(islandsMenu)
                         if playerIsland.PrimaryPart == nil then
                             task.spawn(function()
                                 local initialPosition = localPlayer.Character.PrimaryPart.CFrame
-                                localPlayer.Character.PrimaryPart.CFrame = player.Character.PrimaryPart.CFrame
+                                local targetPlayerCharacter = player.Character
+                                if targetPlayerCharacter.PrimaryPart == nil then
+                                    error("The target player has not charged", 6)
+                                end
+                                localPlayer.Character.PrimaryPart.CFrame = targetPlayerCharacter.PrimaryPart.CFrame
                                 task.wait(0.25)
                                 localPlayer.Character.PrimaryPart.CFrame = initialPosition
                             end)
                         end
 
+                        if playerIsland.PrimaryPart == nil then
+                            error("The island has not charged fast enough or the target player is not on his island", 6)
+                        end
                         localPlayer.Character.PrimaryPart.CFrame = playerIsland.PrimaryPart.CFrame
                     end)
                     if not success then
