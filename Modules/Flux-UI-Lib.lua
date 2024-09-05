@@ -210,7 +210,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 	MainFrame:TweenSize(UDim2.new(0, 706, 0, 484), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
 
 	local uitoggled = false
-	local function closeMenu()
+	function Flux.closeMenu()
 		if uitoggled == false then
 			MainFrame:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
 			uitoggled = true
@@ -226,13 +226,13 @@ function Flux:Window(text, bottom,mainclr,toclose)
 	UserInputService.InputBegan:Connect(
 		function(io)
 			if io.KeyCode == CloseBind then
-				closeMenu()
+				Flux.closeMenu()
 			end
 		end
 	)
 
 	FluxButton.MouseButton1Click:Connect(function()
-		closeMenu()		
+		Flux.closeMenu()		
 	end)
 	
 	function Flux.Notification(desc, buttontitle)
