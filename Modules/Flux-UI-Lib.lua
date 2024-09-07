@@ -538,7 +538,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			end
 		end)
 		local ContainerContent = {}
-		function ContainerContent.Button(buttonText, desc, callback)
+		function ContainerContent.Button(buttonText, desc, layout, callback)
 			if desc == "" then
 				desc = "There is no description for this button."
 			end
@@ -565,6 +565,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Button.Text = ""
 			Button.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Button.TextSize = 14.000
+			Button.LayoutOrder = layout
 
 			ButtonCorner.CornerRadius = UDim.new(0, 4)
 			ButtonCorner.Name = "ButtonCorner"
@@ -764,7 +765,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 				Destroy = destroy,
 			}
 		end
-		function ContainerContent.Toggle(toggleText, desc,default, callback)
+		function ContainerContent.Toggle(toggleText, desc, default, layout, callback)
 			local ToggleDescToggled = false
 			local Toggled = false
 			if desc == "" then
@@ -796,6 +797,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Toggle.Text = ""
 			Toggle.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Toggle.TextSize = 14.000
+			Toggle.LayoutOrder = layout
 
 			ToggleCorner.CornerRadius = UDim.new(0, 4)
 			ToggleCorner.Name = "ToggleCorner"
@@ -1043,7 +1045,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 
 		end
 		
-		function ContainerContent.Slider(sliderText,desc,min,max,start,callback)
+		function ContainerContent.Slider(sliderText,desc,min,max,start,layout,callback)
 			local SliderFunc = {}
 			local SliderDescToggled = false
             local dragging = false
@@ -1076,6 +1078,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Slider.Text = ""
 			Slider.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Slider.TextSize = 14.000
+			Slider.LayoutOrder = layout
 
 			SliderCorner.CornerRadius = UDim.new(0, 4)
 			SliderCorner.Name = "SliderCorner"
@@ -1346,7 +1349,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			end
 			return SliderFunc
 		end
-		function ContainerContent.Dropdown(dropdownText,list,callback)
+		function ContainerContent.Dropdown(dropdownText,list,layout,callback)
 			local DropFunc = {}
 			local Selected = dropdownText
 			local FrameSize = 43
@@ -1374,6 +1377,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Dropdown.Text = ""
 			Dropdown.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Dropdown.TextSize = 14.000
+			Dropdown.LayoutOrder = layout
 
 			DropdownCorner.CornerRadius = UDim.new(0, 4)
 			DropdownCorner.Name = "DropdownCorner"
@@ -1827,7 +1831,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			end
 			return DropFunc
 		end
-		function ContainerContent.Colorpicker(colorpickerText,preset,callback)
+		function ContainerContent.Colorpicker(colorpickerText,preset,layout,callback)
 			local ColorPickerToggled = false
 			local OldToggleColor = Color3.fromRGB(0, 0, 0)
 			local OldColor = Color3.fromRGB(0, 0, 0)
@@ -1872,6 +1876,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Colorpicker.ClipsDescendants = true
 			Colorpicker.Position = UDim2.new(0.110937499, 0, 0.67653507, 0)
 			Colorpicker.Size = UDim2.new(0, 457, 0, 43)
+			Colorpicker.LayoutOrder = layout
 
 			ColorpickerCorner.CornerRadius = UDim.new(0, 4)
 			ColorpickerCorner.Name = "ColorpickerCorner"
@@ -2334,7 +2339,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			}
 
 		end
-		function ContainerContent.Line()
+		function ContainerContent.Line(layout)
 			local Line = Instance.new("TextButton")
 			local LineCorner = Instance.new("UICorner")
 
@@ -2349,6 +2354,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Line.Text = ""
 			Line.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Line.TextSize = 14.000
+			Line.LayoutOrder = layout
 
 			LineCorner.CornerRadius = UDim.new(0, 4)
 			LineCorner.Name = "LineCorner"
@@ -2365,7 +2371,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			}
 
 		end
-		function ContainerContent.Label(labelText)
+		function ContainerContent.Label(labelText, layout)
 			local Label = Instance.new("TextButton")
 			local LabelCorner = Instance.new("UICorner")
 			local labelTitle = Instance.new("TextLabel")
@@ -2381,6 +2387,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Label.Text = ""
 			Label.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Label.TextSize = 14.000
+			Label.LayoutOrder = layout
 
 			LabelCorner.CornerRadius = UDim.new(0, 4)
 			LabelCorner.Name = "LabelCorner"
@@ -2410,7 +2417,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			}
 
 		end
-		function ContainerContent.Textbox(textboxText,desc,disapper,callback)
+		function ContainerContent.Textbox(textboxText,desc,disapper,layout,callback)
 			if desc == "" then
 				desc = "There is no description for this textbox."
 			end
@@ -2440,6 +2447,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Textbox.Text = ""
 			Textbox.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Textbox.TextSize = 14.000
+			Textbox.LayoutOrder = layout
 
 			TextboxCorner.CornerRadius = UDim.new(0, 4)
 			TextboxCorner.Name = "TextboxCorner"
@@ -2652,7 +2660,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			}
 
 		end
-		function ContainerContent.Bind(bindText,presetbind,callback)
+		function ContainerContent.Bind(bindText,presetbind,layout,callback)
 			local Key = presetbind.Name
 			local Bind = Instance.new("TextButton")
 			local BindCorner = Instance.new("UICorner")
@@ -2674,6 +2682,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Bind.Text = ""
 			Bind.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Bind.TextSize = 14.000
+			Bind.LayoutOrder = layout
 
 			BindCorner.CornerRadius = UDim.new(0, 4)
 			BindCorner.Name = "BindCorner"
