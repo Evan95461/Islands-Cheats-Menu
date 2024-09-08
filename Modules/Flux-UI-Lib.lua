@@ -2651,12 +2651,18 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			end)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 
+			local function set(textToChange)
+				Textbox.Text = textToChange
+				pcall(callback, textToChange)
+			end
+
 			local function destroy()
-				TextBox:Destroy()
+				Textbox:Destroy()
 			end
 
 			return {
-				Destroy = destroy
+				Destroy = destroy,
+				Set = set
 			}
 
 		end
@@ -2838,12 +2844,22 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 
+			local function bind()
+				pcall(callback)
+			end
+
+			local function set(key)
+				Key = key.Name
+			end
+
 			local function destroy()
 				Bind:Destroy()
 			end
 
 			return {
-				Destroy = destroy
+				Destroy = destroy,
+				Bind = bind,
+				Set = set
 			}
 
 		end
