@@ -2529,6 +2529,9 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 			TextBox.TextSize = 15.000
 			TextBox.TextTransparency = 0.300
+			TextBox.ClipsDescendants = true
+			TextBox.TextXAlignment = Enum.TextXAlignment.Left
+			TextBox.ClearTextOnFocus = false
 
 			ArrowBtn.Name = "ArrowBtn"
 			ArrowBtn.Parent = Textbox
