@@ -10,7 +10,7 @@ local loadData = function(fileName)
         if isfolder(`{FOLDER_NAME}/`) then
            return HttpService:JSONDecode(readfile(`{FOLDER_NAME}/{fileName}.json`)) 
         end
-        return
+        return nil
     end)
 end
 
