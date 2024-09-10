@@ -20,7 +20,7 @@ end
 local loadData = function(fileName)
     pcall(function()
         if isfolder(`{FOLDER_NAME}/`) then
-           return readfile(`{FOLDER_NAME}/{fileName}.json`) 
+           return HttpService:JSONDecode(readfile(`{FOLDER_NAME}/{fileName}.json`)) 
         end
         return
     end)
