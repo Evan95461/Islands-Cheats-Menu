@@ -1,5 +1,6 @@
 --// Services
 local HttpService = game:GetService("HttpService")
+local ReplicatedFirst = game:GetService("ReplicatedFirst")
 
 --// Variables
 local FOLDER_NAME = "meteor_data"
@@ -19,6 +20,8 @@ local saveData = function(fileName, data)
             local previousData = loadData(fileName)
             if previousData ~= nil then
                 table.insert(previousData, data)
+            else
+                previousData = data
             end
             if isfolder(`{FOLDER_NAME}/`) then
                 writefile(`{FOLDER_NAME}/{fileName}.json`, HttpService:JSONEncode(previousData))
