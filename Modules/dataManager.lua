@@ -23,7 +23,9 @@ local saveData = function(fileName, data)
             local dataToSave = {}
             local previousData = loadData(fileName)
             if previousData ~= nil then
-                table.insert(dataToSave, previousData)
+                for _, pdata in previousData do
+                    table.insert(dataToSave, pdata)
+                end
                 table.insert(dataToSave, data)
             else
                 table.insert(dataToSave, data)
