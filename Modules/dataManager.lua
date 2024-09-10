@@ -20,17 +20,19 @@ end
 local saveData = function(fileName, data)
     pcall(function()
         task.spawn(function()
+            local dataToSave = {}
             local previousData = loadData(fileName)
             if previousData ~= nil then
-                table.insert(previousData, data)
+                table.insert(dataToSave, previousData)
+                table.insert(dataToSave, data)
             else
-                previousData = data
+                table.insert(dataToSave, data)
             end
             if isfolder(`{FOLDER_NAME}/`) then
-                writefile(`{FOLDER_NAME}/{fileName}.json`, HttpService:JSONEncode(previousData))
+                writefile(`{FOLDER_NAME}/{fileName}.json`, HttpService:JSONEncode(dataToSave))
             else
                 makefolder(`{FOLDER_NAME}/`)
-                writefile(`{FOLDER_NAME}/{fileName}.json`, HttpService:JSONEncode(previousData))
+                writefile(`{FOLDER_NAME}/{fileName}.json`, HttpService:JSONEncode(dataToSave))
             end
         end)
     end)
