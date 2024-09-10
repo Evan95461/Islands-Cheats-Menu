@@ -6,12 +6,15 @@ local ReplicatedFirst = game:GetService("ReplicatedFirst")
 local FOLDER_NAME = "meteor_data"
 
 local loadData = function(fileName)
-    pcall(function()
+    local success, result = pcall(function()
         if isfolder(`{FOLDER_NAME}/`) then
-           return HttpService:JSONDecode(readfile(`{FOLDER_NAME}/{fileName}.json`)) 
+           return HttpService:JSONDecode(readfile(`{FOLDER_NAME}/{fileName}.json`))
+        else
+           return
         end
-        return nil
     end)
+
+    if success then return result end
 end
 
 local saveData = function(fileName, data)
