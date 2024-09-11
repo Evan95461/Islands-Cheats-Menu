@@ -2555,7 +2555,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			TextBox.FocusLost:Connect(
 				function(ep)
 					if ep then
-						if #TextBox.Text > 0 then
+						if #TextBox.Text >= 0 then
 							pcall(callback, TextBox.Text)
 							if disapper then
 								TextBox.Text = ""
