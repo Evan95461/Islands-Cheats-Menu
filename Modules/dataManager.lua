@@ -28,12 +28,10 @@ local saveData = function(fileName, data)
                 end
             end
             table.insert(dataToSave, data)
-            if isfolder(`{FOLDER_NAME}/`) then
-                writefile(`{FOLDER_NAME}/{fileName}.json`, HttpService:JSONEncode(dataToSave))
-            else
+            if not isfolder(`{FOLDER_NAME}/`) then
                 makefolder(`{FOLDER_NAME}/`)
-                writefile(`{FOLDER_NAME}/{fileName}.json`, HttpService:JSONEncode(dataToSave))
             end
+            writefile(`{FOLDER_NAME}/{fileName}.json`, HttpService:JSONEncode(dataToSave))
         end)
     end)
 end
