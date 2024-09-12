@@ -26,10 +26,8 @@ local saveData = function(fileName, data)
                 for _, pdata in previousData do
                     table.insert(dataToSave, pdata)
                 end
-                table.insert(dataToSave, data)
-            else
-                table.insert(dataToSave, data)
             end
+            table.insert(dataToSave, data)
             if isfolder(`{FOLDER_NAME}/`) then
                 writefile(`{FOLDER_NAME}/{fileName}.json`, HttpService:JSONEncode(dataToSave))
             else
