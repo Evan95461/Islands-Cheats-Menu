@@ -2409,7 +2409,7 @@ function Flux:Window(text, bottom,mainclr,toclose)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 
 			local function set(textToChange)
-				Label.Text = textToChange
+				labelTitle.Text = textToChange
 			end
 
 			local function destroy()
