@@ -6,14 +6,17 @@ local FOLDER_NAME = "meteor_data"
 
 -- Utils
 
--- find an element in a table
-local function deepFind(table, targetElement)
-    for index, value in table do
+-- recursive find for an element in a table
+local function deepFind(tbl, targetElement)
+    for index, value in pairs(tbl) do
         if value == targetElement then
             return index
         end
         if type(value) == "table" then
-            deepFind(value, targetElement)
+            local foundIndex = deepFind(value, targetElement)
+            if foundIndex then
+                return index
+            end
         end
     end
     return nil
