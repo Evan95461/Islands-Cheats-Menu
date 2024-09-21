@@ -22,6 +22,8 @@ local function deepFind(tbl, targetElement)
     return nil
 end
 
+-- Methods
+
 -- Get data in a specific file
 local loadData = function(fileName)
     local success, result = pcall(function()
