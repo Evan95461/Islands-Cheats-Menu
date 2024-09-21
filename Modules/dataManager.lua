@@ -48,13 +48,7 @@ local saveData = function(fileName, data)
                     table.insert(dataToSave, pdata)
                 end
             end
-            if type(data) == "table" then
-                for _, dataInTable in data do
-                    table.insert(dataToSave, dataInTable)
-                end
-            else
-                table.insert(dataToSave, data)
-            end
+            table.insert(dataToSave, data)
             if not isfolder(`{FOLDER_NAME}/`) then
                 makefolder(`{FOLDER_NAME}/`)
             end
