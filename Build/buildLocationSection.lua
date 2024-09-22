@@ -11,7 +11,6 @@ local WAYPOINTS_FILENAME = "waypoints_data"
 local MAX_WAYPOINTS = 25
 
 local localPlayer = Players.LocalPlayer
-local waypointsFolder = Workspace:WaitForChild("Waypoints")
 local islandTeleportButtons = {}
 local createdWaypointsButtons = {}
 local waypointTemplate = {
@@ -52,6 +51,7 @@ local buildLocationSection = function(islandsMenu, Flux)
 
     -- Create section
     local locationSection = islandsMenu.Tab("Fast travel", "rbxassetid://80160769792985")
+    local waypointsFolder = Workspace:WaitForChild("Waypoints")
 
     -- Setup the default location
     locationSection.Label("Default Location", 0)
