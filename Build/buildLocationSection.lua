@@ -223,7 +223,6 @@ local buildLocationSection = function(islandsMenu, Flux)
         end
 
         local createdWaypoints = dataManager.loadData(WAYPOINTS_FILENAME)
-        local waypointsFolder = Workspace:WaitForChild("Waypoints")
         waypointsCountLabel.Set(`Custom location (Waypoints) {countWaypoints()}/{MAX_WAYPOINTS}`)
         if countWaypoints() == 0 then
             noWaypointsMessage = locationSection.Label("There are not created waypoints yet !", 4)
