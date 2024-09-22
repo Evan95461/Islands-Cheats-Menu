@@ -11,7 +11,7 @@ local WAYPOINTS_FILENAME = "waypoints_data"
 local MAX_WAYPOINTS = 25
 
 local localPlayer = Players.LocalPlayer
-local waypointsFolder = Workspace:FindFirstChild("Waypoints")
+local waypointsFolder = Workspace:WaitForChild("Waypoints")
 local islandTeleportButtons = {}
 local createdWaypointsButtons = {}
 local waypointTemplate = {
@@ -228,7 +228,9 @@ local buildLocationSection = function(islandsMenu, Flux)
             noWaypointsMessage = locationSection.Label("There are not created waypoints yet !", 4)
             return
         end
-        noWaypointsMessage.Destroy()
+        if noWaypointsMessage then 
+            noWaypointsMessage.Destroy()
+        end
 
         -- Create waypoint part, Gui and button
         for _, waypoint: typeof(waypointTemplate) in createdWaypoints do
