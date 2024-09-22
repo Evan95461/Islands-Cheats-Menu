@@ -61,6 +61,10 @@ local buildLocationSection = function(islandsMenu, Flux)
     locationSection.Button("🏘️ 〃 Hub (Market)", "Teleport to the Hub market", 0,function()
         local success, errorMessage = pcall(function()
             localPlayer.Character.PrimaryPart.CFrame = teleportLocation.hubMarket
+
+            if _G.configs["fastTravelConfig"].autoCloseMenu then
+                Flux.closeMenu()
+            end
         end)
 
         if not success then
@@ -72,6 +76,10 @@ local buildLocationSection = function(islandsMenu, Flux)
     locationSection.Button("⛏️ 〃 Hub (Mine)", "Teleport to the Hub mine", 0, function()
         local success, errorMessage = pcall(function()
             localPlayer.Character.PrimaryPart.CFrame = teleportLocation.hubMine
+
+            if _G.configs["fastTravelConfig"].autoCloseMenu then
+                Flux.closeMenu()
+            end
         end)
 
         if not success then
@@ -83,6 +91,10 @@ local buildLocationSection = function(islandsMenu, Flux)
     locationSection.Button("🟩 〃 Slime island", "Teleport to the Slime island", 0, function()
         local success, errorMessage = pcall(function()
             localPlayer.Character.PrimaryPart.CFrame = teleportLocation.slimeIsland
+
+            if _G.configs["fastTravelConfig"].autoCloseMenu then
+                Flux.closeMenu()
+            end
         end)
 
         if not success then
@@ -99,6 +111,10 @@ local buildLocationSection = function(islandsMenu, Flux)
     locationSection.Button("🌱 🌾 〃 Seeds / Crops merchants", "Teleport to the seeds and crops merchants", 1, function()
         local success, errorMessage = pcall(function()
             localPlayer.Character.PrimaryPart.CFrame = teleportLocation.cropsMerchant
+
+            if _G.configs["fastTravelConfig"].autoCloseMenu then
+                Flux.closeMenu()
+            end
         end)
 
         if not success then
@@ -110,6 +126,10 @@ local buildLocationSection = function(islandsMenu, Flux)
     locationSection.Button("🏗️ 🏦 〃 Blocks / Banker merchants", "Teleport to the blocks and banker merchants", 1, function()
         local success, errorMessage = pcall(function()
             localPlayer.Character.PrimaryPart.CFrame = teleportLocation.blockMerchant
+
+            if _G.configs["fastTravelConfig"].autoCloseMenu then
+                Flux.closeMenu()
+            end
         end)
 
         if not success then
@@ -121,6 +141,10 @@ local buildLocationSection = function(islandsMenu, Flux)
     locationSection.Button("🔮 〃 Totems merchant", "Teleport to the totems merchant", 1, function()
         local success, errorMessage = pcall(function()
             localPlayer.Character.PrimaryPart.CFrame = teleportLocation.totemsMerchant
+
+            if _G.configs["fastTravelConfig"].autoCloseMenu then
+                Flux.closeMenu()
+            end
         end)
 
         if not success then
@@ -132,6 +156,10 @@ local buildLocationSection = function(islandsMenu, Flux)
     locationSection.Button("🤺 〃 Adventurer merchant", "Teleport to the adventurer merchant", 1, function()
         local success, errorMessage = pcall(function()
             localPlayer.Character.PrimaryPart.CFrame = teleportLocation.adventurerMerchant
+
+            if _G.configs["fastTravelConfig"].autoCloseMenu then
+                Flux.closeMenu()
+            end
         end)
 
         if not success then
@@ -161,6 +189,10 @@ local buildLocationSection = function(islandsMenu, Flux)
                     local success, errorMessage = pcall(function()
                         local playerIsland = Workspace.Islands:WaitForChild(`{player.UserId}-island`)
                         localPlayer.Character.PrimaryPart.CFrame = playerIsland.PrimaryPart.CFrame
+
+                        if _G.configs["fastTravelConfig"].autoCloseMenu then
+                            Flux.closeMenu()
+                        end
                     end)
             
                     if not success then
@@ -192,6 +224,10 @@ local buildLocationSection = function(islandsMenu, Flux)
                             error("The island has not charged fast enough or the target player is not on his island", 6)
                         end
                         localPlayer.Character.PrimaryPart.CFrame = playerIsland.PrimaryPart.CFrame
+
+                        if _G.configs["fastTravelConfig"].autoCloseMenu then
+                            Flux.closeMenu()
+                        end
                     end)
                     if not success then
                         Flux.Notification(`An error occured ! Impossible to teleport you to {player.Name}'s Island. Error: {errorMessage}. Please try again.`, "OK !")
@@ -287,6 +323,10 @@ local buildLocationSection = function(islandsMenu, Flux)
             local waypointButton = locationSection.Button(`{waypoint.name}`, `{waypoint.desc}`, 4, function()
                 local success, errorMessage = pcall(function()
                     localPlayer.Character.PrimaryPart.CFrame = part.CFrame
+
+                    if _G.configs["fastTravelConfig"].autoCloseMenu then
+                        Flux.closeMenu()
+                    end
                 end)
         
                 if not success then
