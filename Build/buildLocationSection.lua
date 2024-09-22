@@ -208,16 +208,14 @@ local buildLocationSection = function(islandsMenu, Flux)
                         -- Try load player island
                         local playerIsland = Workspace.Islands:WaitForChild(`{player.UserId}-island`)
                         if playerIsland.PrimaryPart == nil then
-                            task.spawn(function()
-                                local initialPosition = localPlayer.Character.PrimaryPart.CFrame
-                                local targetPlayerCharacter = player.Character
-                                if targetPlayerCharacter.PrimaryPart == nil then
-                                    error("The target player has not charged", 6)
-                                end
-                                localPlayer.Character.PrimaryPart.CFrame = targetPlayerCharacter.PrimaryPart.CFrame
-                                task.wait(0.25)
-                                localPlayer.Character.PrimaryPart.CFrame = initialPosition
-                            end)
+                            local initialPosition = localPlayer.Character.PrimaryPart.CFrame
+                            local targetPlayerCharacter = player.Character
+                            if targetPlayerCharacter.PrimaryPart == nil then
+                                error("The target player has not charged", 6)
+                            end
+                            localPlayer.Character.PrimaryPart.CFrame = targetPlayerCharacter.PrimaryPart.CFrame
+                            task.wait(0.25)
+                            localPlayer.Character.PrimaryPart.CFrame = initialPosition
                         end
 
                         if playerIsland.PrimaryPart == nil then
