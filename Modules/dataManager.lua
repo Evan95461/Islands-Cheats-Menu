@@ -22,7 +22,26 @@ local function deepFind(tbl, targetElement)
     return nil
 end
 
--- Methods
+-- recursive compare table
+local function compareTables(table1, table2)
+    local equal = true
+
+    for key1, value1 in pairs(table1) do
+        if typeof(value1) == "table" then
+            equal = compareTables(value1, table2[key1])
+            if not equal then
+                break
+            end
+        elseif value1 ~= table2[key1] then
+            equal = false
+            break
+        end
+    end
+
+    return equal
+end
+
+--// Methods
 
 -- Get data in a specific file
 local loadData = function(fileName)
@@ -43,7 +62,7 @@ local saveData = function(fileName, data)
         task.spawn(function()
             local dataToSave = {}
             local previousData = loadData(fileName)
-            if previousData ~= nil then
+            if previousData ~= nil and not compareTables(previousData, data) then
                 for _, pdata in previousData do
                     table.insert(dataToSave, pdata)
                 end
