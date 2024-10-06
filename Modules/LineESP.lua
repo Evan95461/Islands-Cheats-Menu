@@ -14,7 +14,7 @@ function new(color, thickness, transparency)
     local self = setmetatable(
         {
             tracer = Drawing.new("Line"),
-            visible = false,
+            visible = true,
             target = nil,
             color = color or Color3.fromRGB(255, 255, 255),
             thickness = thickness or 1,
@@ -56,9 +56,8 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
         highlight.OutlineTransparency = 1
 
         RunService.RenderStepped:Connect(function()
-            if self.target ~= nil and typeof(self.target) == "Instance" then
+            if self.target ~= nil and typeof(self.target) == "Instance" and self.visible == true then
 
-                Tracer.Visible = self.visible
                 Tracer.Color = self.color
                 Tracer.Thickness = self.thickness
                 Tracer.Transparency = self.transparency
@@ -74,11 +73,11 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                 if targetOnScreen and playerOnScreen then
                     Tracer.From = Vector2.new(playerVector.X, playerVector.Y)
                     Tracer.To = Vector2.new(targetVector.X, targetVector.Y)
-                    self.visible = true
+                    Tracer.Visible = true
                     hitbox.Visible = true
                     highlight.Enabled = true
                 elseif not targetOnScreen or not playerOnScreen then
-                    self.visible = false
+                    Tracer.Visible = false
                     hitbox.Visible = false
                     highlight.Enabled = false
                 end
