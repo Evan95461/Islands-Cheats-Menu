@@ -81,6 +81,8 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                     hitbox.Visible = false
                     highlight.Enabled = false
                 end
+            else
+                Tracer.Visible = false
             end
         end)
     end
