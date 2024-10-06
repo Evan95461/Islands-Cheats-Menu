@@ -32,7 +32,7 @@ end
 export type espObject = typeof(new(...))
 
 function espObject.Create(self: espObject, chosenTarget: Instance)
-    
+
     local Tracer = self.tracer
     self.target = chosenTarget
 
@@ -55,9 +55,9 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                 if targetOnScreen and playerOnScreen then
                     Tracer.From = Vector2.new(playerVector.X, playerVector.Y)
                     Tracer.To = Vector2.new(targetVector.X, targetVector.Y)
-                    self.Visible = true
+                    self.visible = true
                 elseif not targetOnScreen or not playerOnScreen then
-                    self.Visible = false
+                    self.visible = false
                 end
             end
         end)
