@@ -15,6 +15,7 @@ function new(color, thickness, transparency)
     local espAttributs = {
         tracer = Drawing.new("Line"),
         visible = false,
+        target = nil,
         color = color or Color3.fromRGB(255, 255, 255),
         thickness = thickness or 1,
         transparency = transparency or 1,
@@ -27,13 +28,14 @@ end
 
 export type espObject = typeof(new(...))
 
-function espObject.Create(self: espObject, target: Instance)
+function espObject.Create(self: espObject, chosenTarget: Instance)
     
     local Tracer = self.tracer
+    self.target = chosenTarget
 
     local function lineesp()
         RunService.RenderStepped:Connect(function()
-            if target ~= nil and typeof(target) == "Instance" then
+            if self.target ~= nil and typeof(self.target) == "Instance" then
                 local targetVector, targetOnScreen
                 local playerVector, playerOnScreen
 
@@ -42,8 +44,8 @@ function espObject.Create(self: espObject, target: Instance)
                 Tracer.Thickness = self.thickness
                 Tracer.Transparency = self.transparency
 
-                if target:FindFirstChild("Humanoid") and target:FindFirstChild("HumanoidRootPart") then
-                    targetVector, targetOnScreen = camera:WorldToViewportPoint(target.HumanoidRootPart.Position)
+                if self.target:FindFirstChild("Humanoid") and self.target:FindFirstChild("HumanoidRootPart") then
+                    targetVector, targetOnScreen = camera:WorldToViewportPoint(self.target.HumanoidRootPart.Position)
                     playerVector, playerOnScreen = camera:WorldToViewportPoint(client.Character.PrimaryPart.Position)
                 end
 
@@ -62,6 +64,10 @@ end
 
 function espObject.UpdateVisible(self: espObject, visible: boolean)
     self.visible = visible
+end
+
+function espObject.UpdateTarget(self: espObject, target: Instance)
+    self.target = target
 end
 
 function espObject.UpdateColor(self: espObject, color: Color3)
