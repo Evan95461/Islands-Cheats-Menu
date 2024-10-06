@@ -15,7 +15,6 @@ function new(color, thickness, transparency)
         {
             tracer = Drawing.new("Line"),
             visible = true,
-            target = nil,
             color = color or Color3.fromRGB(255, 255, 255),
             thickness = thickness or 1,
             transparency = transparency or 1,
@@ -31,32 +30,31 @@ end
 
 export type espObject = typeof(new(...))
 
-function espObject.Create(self: espObject, chosenTarget: Instance)
+function espObject.Create(self: espObject, target: Instance)
 
     local Tracer = self.tracer
-    self.target = chosenTarget
 
     local function lineesp()
 
         local hitbox = Instance.new("SelectionBox")
-        hitbox.Adornee = self.target
+        hitbox.Adornee = target
         hitbox.Name = "hitbox"
-        hitbox.Parent = self.target
+        hitbox.Parent = target
         hitbox.Transparency = 0
         hitbox.SurfaceTransparency = 1
         hitbox.LineThickness = 0.1
         hitbox.Color3 = self.color
 
         local highlight = Instance.new("Highlight")
-        highlight.Adornee = self.target
+        highlight.Adornee = target
         highlight.Name = "highlight"
-        highlight.Parent = self.target
+        highlight.Parent = target
         highlight.FillTransparency = 0.4
         highlight.FillColor = self.color
         highlight.OutlineTransparency = 1
 
         RunService.RenderStepped:Connect(function()
-            if self.target ~= nil and typeof(self.target) == "Instance" and self.visible == true then
+            if target ~= nil and typeof(target) == "Instance" and self.visible == true then
 
                 Tracer.Color = self.color
                 Tracer.Thickness = self.thickness
@@ -65,8 +63,8 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                 local targetVector, targetOnScreen
                 local playerVector, playerOnScreen
 
-                if self.target:FindFirstChild("Humanoid") and self.target:FindFirstChild("HumanoidRootPart") then
-                    targetVector, targetOnScreen = camera:WorldToViewportPoint(self.target.HumanoidRootPart.Position)
+                if target:FindFirstChild("Humanoid") and target:FindFirstChild("HumanoidRootPart") then
+                    targetVector, targetOnScreen = camera:WorldToViewportPoint(target.HumanoidRootPart.Position)
                     playerVector, playerOnScreen = camera:WorldToViewportPoint(client.Character.PrimaryPart.Position)
                 end
 
@@ -91,10 +89,6 @@ end
 
 function espObject.UpdateVisible(self: espObject, visible: boolean)
     self.visible = visible
-end
-
-function espObject.UpdateTarget(self: espObject, target: Instance)
-    self.target = target
 end
 
 function espObject.UpdateColor(self: espObject, color: Color3)
