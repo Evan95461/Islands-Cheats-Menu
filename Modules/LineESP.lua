@@ -1,5 +1,4 @@
 local espObject = {}
-espObject.__index = espObject
 
 --// Services
 local Workspace = game:GetService("Workspace")
@@ -11,18 +10,22 @@ local client = Players.LocalPlayer
 local camera = Workspace.CurrentCamera
 
 function new(color, thickness, transparency)
+    
+    local self = setmetatable(
+        {
+            tracer = Drawing.new("Line"),
+            visible = false,
+            target = nil,
+            color = color or Color3.fromRGB(255, 255, 255),
+            thickness = thickness or 1,
+            transparency = transparency or 1,
+        },
+        {
+            __index = espObject
+        }
+    )
 
-    local espAttributs = {
-        tracer = Drawing.new("Line"),
-        visible = false,
-        target = nil,
-        color = color or Color3.fromRGB(255, 255, 255),
-        thickness = thickness or 1,
-        transparency = transparency or 1,
-    }
-    setmetatable(espObject, espAttributs)
-
-    return espAttributs
+    return self
 
 end
 
