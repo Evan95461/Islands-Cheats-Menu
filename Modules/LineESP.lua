@@ -37,6 +37,24 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
     self.target = chosenTarget
 
     local function lineesp()
+
+        local hitbox = Instance.new("SelectionBox")
+        hitbox.Adornee = self.target
+        hitbox.Name = "hitbox"
+        hitbox.Parent = self.target
+        hitbox.Transparency = 0
+        hitbox.SurfaceTransparency = 1
+        hitbox.LineThickness = 0.1
+        hitbox.Color3 = self.color
+
+        local highlight = Instance.new("Highlight")
+        highlight.Adornee = self.target
+        highlight.Name = "highlight"
+        highlight.Parent = self.target
+        highlight.FillTransparency = 0.4
+        highlight.FillColor = self.color
+        highlight.OutlineTransparency = 1
+
         RunService.RenderStepped:Connect(function()
             if self.target ~= nil and typeof(self.target) == "Instance" then
 
@@ -52,23 +70,6 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                     targetVector, targetOnScreen = camera:WorldToViewportPoint(self.target.HumanoidRootPart.Position)
                     playerVector, playerOnScreen = camera:WorldToViewportPoint(client.Character.PrimaryPart.Position)
                 end
-
-                local hitbox = Instance.new("SelectionBox")
-                hitbox.Adornee = self.target
-                hitbox.Name = "hitbox"
-                hitbox.Parent = self.target
-                hitbox.Transparency = 0
-                hitbox.SurfaceTransparency = 1
-                hitbox.LineThickness = 0.1
-                hitbox.Color3 = self.color
-
-                local highlight = Instance.new("Highlight")
-                highlight.Adornee = self.target
-                highlight.Name = "highlight"
-                highlight.Parent = self.target
-                highlight.FillTransparency = 0.4
-                highlight.FillColor = self.color
-                highlight.OutlineTransparency = 1
 
                 if targetOnScreen and playerOnScreen then
                     Tracer.From = Vector2.new(playerVector.X, playerVector.Y)
