@@ -100,6 +100,13 @@ function espObject.UpdateColor(self: espObject, color: Color3)
     self.color = color
 end
 
+function espObject:DestroyESP()
+    self.target.hitbox:Destroy()
+    self.target.highlight:Destroy()
+    table.clear(self)
+    setmetatable(self, nil)
+end
+
 return {
     new = new,
 }
