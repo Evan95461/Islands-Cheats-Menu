@@ -107,6 +107,7 @@ function espObject:DestroyESP()
         self.target.hitbox:Destroy()
         self.target.highlight:Destroy()
     end
+    self.tracer:Remove()
     table.clear(self)
     setmetatable(self, nil)
 end
