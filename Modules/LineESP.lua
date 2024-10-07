@@ -9,12 +9,12 @@ local Players = game:GetService("Players")
 local client = Players.LocalPlayer
 local camera = Workspace.CurrentCamera
 
-function new(color, thickness, transparency)
+function new(color, thickness, transparency, visible)
     
     local self = setmetatable(
         {
             tracer = Drawing.new("Line"),
-            visible = true,
+            visible = visible,
             target = nil,
             color = color or Color3.fromRGB(255, 255, 255),
             thickness = thickness or 1,
@@ -63,11 +63,10 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                 Tracer.Transparency = self.transparency
 
                 local targetVector, targetOnScreen
-                local playerVector, playerOnScreen
+                local playerVector, playerOnScreen = camera:WorldToViewportPoint(client.Character.PrimaryPart.Position)
 
                 if self.target:FindFirstChild("Humanoid") and self.target:FindFirstChild("HumanoidRootPart") then
                     targetVector, targetOnScreen = camera:WorldToViewportPoint(self.target.HumanoidRootPart.Position)
-                    playerVector, playerOnScreen = camera:WorldToViewportPoint(client.Character.PrimaryPart.Position)
                 end
 
                 if targetOnScreen and playerOnScreen then
@@ -83,6 +82,8 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                 end
             else
                 Tracer.Visible = false
+                hitbox.Visible = false
+                highlight.Enabled = false
             end
         end)
     end
@@ -102,8 +103,10 @@ function espObject.UpdateColor(self: espObject, color: Color3)
 end
 
 function espObject:DestroyESP()
-    self.target.hitbox:Destroy()
-    self.target.highlight:Destroy()
+    if self.target then
+        self.target.hitbox:Destroy()
+        self.target.highlight:Destroy()
+    end
     table.clear(self)
     setmetatable(self, nil)
 end
