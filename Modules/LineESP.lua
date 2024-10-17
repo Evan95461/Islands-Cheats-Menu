@@ -69,7 +69,7 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
         textLabel.Name = "mobInfosText"
         textLabel.Parent = billboard
         textLabel.BackgroundTransparency = 1
-        textLabel.TextSize = 20
+        textLabel.TextSize = 12
         textLabel.TextColor3 = self.color
         textLabel.AnchorPoint = Vector2.new(0.5, 0.5)
         textLabel.Size = UDim2.new(0, 700, 0.7, 0)
