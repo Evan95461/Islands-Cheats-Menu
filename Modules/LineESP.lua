@@ -59,14 +59,14 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
         highlight.OutlineTransparency = 1
 
         local billboard = Instance.new("BillboardGui")
-        billboard.Name = "waypointGUI"
+        billboard.Name = "mobInfosGUI"
         billboard.Parent = self.target
         billboard.Adornee = self.target
         billboard.AlwaysOnTop = true
         billboard.Size = UDim2.new(0, 200, 0, 100)
 
         local textLabel = Instance.new("TextLabel")
-        textLabel.Name = "waypointName"
+        textLabel.Name = "mobInfosText"
         textLabel.Parent = billboard
         textLabel.BackgroundTransparency = 1
         textLabel.TextSize = 20
@@ -88,8 +88,9 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                 if self.target.IsPlayer == false then
                     targetVector, targetOnScreen = camera:WorldToViewportPoint(self.target.HumanoidRootPart.Position)
 
+                    print("ok")
                     local distance = math.round(client:DistanceFromCharacter(self.target.HumanoidRootPart.Position))
-                    --textLabel.Text = `💖 {self.target.CurrentHealth}/{self.target.MaxHealth} | ⚔️ {mobsName[self.target.Name]} | 📍 {distance}m`
+                    textLabel.Text = `💖 {self.target.CurrentHealth}/{self.target.MaxHealth} | ⚔️ {mobsName[self.target.Name]} | 📍 {distance}m`
                 end
 
                 if targetOnScreen and playerOnScreen then
