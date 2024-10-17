@@ -89,7 +89,7 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                     targetVector, targetOnScreen = camera:WorldToViewportPoint(self.target.HumanoidRootPart.Position)
 
                     local distance = math.round(client:DistanceFromCharacter(self.target.HumanoidRootPart.Position))
-                    textLabel.Text = `💖 {self.target.CurrentHealth}/{self.target.MaxHealth} | ⚔️ {mobsName[self.target.Name]} | 📍 {distance}m`
+                    --textLabel.Text = `💖 {self.target.CurrentHealth}/{self.target.MaxHealth} | ⚔️ {mobsName[self.target.Name]} | 📍 {distance}m`
                 end
 
                 if targetOnScreen and playerOnScreen then
