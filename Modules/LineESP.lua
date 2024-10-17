@@ -5,6 +5,9 @@ local Workspace = game:GetService("Workspace")
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
+--// Modules
+local mobsName = loadstring(game:HttpGet("https://raw.githubusercontent.com/Evan95461/Islands-Cheats-Menu/main/Data/mobsName.lua"))()
+
 --// Variables
 local client = Players.LocalPlayer
 local camera = Workspace.CurrentCamera
@@ -55,6 +58,23 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
         highlight.FillColor = self.color
         highlight.OutlineTransparency = 1
 
+        local billboard = Instance.new("BillboardGui")
+        billboard.Name = "waypointGUI"
+        billboard.Parent = self.target
+        billboard.Adornee = self.target
+        billboard.AlwaysOnTop = true
+        billboard.Size = UDim2.new(0, 200, 0, 100)
+
+        local textLabel = Instance.new("TextLabel")
+        textLabel.Name = "waypointName"
+        textLabel.Parent = billboard
+        textLabel.BackgroundTransparency = 1
+        textLabel.TextSize = 20
+        textLabel.TextColor3 = self.color
+        textLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+        textLabel.Size = UDim2.new(0, 700, 0.7, 0)
+        textLabel.Position = UDim2.new(0.5, 0, 0.3, 0)
+
         RunService.RenderStepped:Connect(function()
             if self.target ~= nil and typeof(self.target) == "Instance" and self.visible == true then
 
@@ -65,8 +85,20 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                 local targetVector, targetOnScreen
                 local playerVector, playerOnScreen = camera:WorldToViewportPoint(client.Character.PrimaryPart.Position)
 
-                if self.target:FindFirstChild("Humanoid") and self.target:FindFirstChild("HumanoidRootPart") then
+                if self.target:FindFirstChild("IsPlayer") and self.target.IsPlayer == false then
                     targetVector, targetOnScreen = camera:WorldToViewportPoint(self.target.HumanoidRootPart.Position)
+
+                    task.spawn(function()
+                        local lastDistance
+                        while true do
+                            local distance = math.round(client:DistanceFromCharacter(self.target.HumanoidRootPart.Position))
+                            if distance ~= lastDistance then
+                                textLabel.Text = `💖 {self.target.CurrentHealth}/{self.target.MaxHealth} | ⚔️ {mobsName[self.target.Name]} | 📍 {distance}m`
+                                lastDistance = distance
+                            end
+                            task.wait(0.1)
+                        end
+                    end)
                 end
 
                 if targetOnScreen and playerOnScreen then
