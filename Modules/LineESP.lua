@@ -106,15 +106,18 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                     Tracer.To = Vector2.new(targetVector.X, targetVector.Y)
                     Tracer.Visible = true
                     hitbox.Visible = true
+                    billboard.Enabled = true
                     highlight.Enabled = true
                 elseif not targetOnScreen or not playerOnScreen then
                     Tracer.Visible = false
                     hitbox.Visible = false
+                    billboard.Enabled = false
                     highlight.Enabled = false
                 end
             else
                 Tracer.Visible = false
                 hitbox.Visible = false
+                billboard.Enabled = false
                 highlight.Enabled = false
             end
         end)
