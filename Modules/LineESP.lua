@@ -85,7 +85,7 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                 local targetVector, targetOnScreen
                 local playerVector, playerOnScreen = camera:WorldToViewportPoint(client.Character.PrimaryPart.Position)
 
-                if self.target:FindFirstChild("IsPlayer") and not self.target.IsPlayer then
+                if self.target:FindFirstChild("Humanoid") and self.target:FindFirstChild("HumanoidRootPart") then
                     targetVector, targetOnScreen = camera:WorldToViewportPoint(self.target.HumanoidRootPart.Position)
 
                     local distance = math.round(client:DistanceFromCharacter(self.target.HumanoidRootPart.Position))
