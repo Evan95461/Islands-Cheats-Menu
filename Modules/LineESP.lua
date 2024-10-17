@@ -85,7 +85,7 @@ function espObject.Create(self: espObject, chosenTarget: Instance)
                 local targetVector, targetOnScreen
                 local playerVector, playerOnScreen = camera:WorldToViewportPoint(client.Character.PrimaryPart.Position)
 
-                if self.target:FindFirstChild("IsPlayer") and self.target.IsPlayer == false then
+                if self.target.IsPlayer == false then
                     targetVector, targetOnScreen = camera:WorldToViewportPoint(self.target.HumanoidRootPart.Position)
 
                     task.spawn(function()
